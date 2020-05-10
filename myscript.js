@@ -21,6 +21,7 @@ var paddleLeft = 180;
 var ballLeft = 30;
 var ballTop = 20;
 
+var drag = false;
 window.addEventListener('load', init);
 window.addEventListener('resize', init);
 
@@ -30,23 +31,31 @@ function init() {
     paddle = document.getElementById('paddle');
     score = document.getElementById('score');
     paddleWidth = 100;
-    
+
     //store your dom object in local variable whenever possible, to reduce DOm interaction in gaming, its costly
     //after all are loaded
 
     layoutPage();
     document.addEventListener('keydown', keyListener, false);
+    document.addEventListener('mousedown', mouseDown, false);
+    document.addEventListener('mousemove', mouseMove, false);
+    document.addEventListener('mouseup', mouseUp, false);
+
+    document.addEventListener('touchstart', mouseDown, false);
+    document.addEventListener('touchmove', mouseMove, false);
+    document.addEventListener('touchend', mouseUp, false);
+
 
     timer = requestAnimationFrame(start); //optimised than setInterval and setTimeout
 
 }
 
 function layoutPage() {
-   // aWidth = window.innerWidth;
+    // aWidth = window.innerWidth;
     //aHeight = window.innerHeight;
 
     //pWidth = aWidth - 22;
-    pHeight = aHeight - 20;     // height of device used - (height and bottom of score)
+    pHeight = aHeight - 20; // height of device used - (height and bottom of score)
 
     playingArea.style.width = pWidth + "px";
     playingArea.style.height = pHeight + "px"
@@ -61,7 +70,7 @@ function keyListener(e) {
         if (paddleLeft < 0)
             paddleLeft = 18;
 
-    } else if ((key == 39 || key == 68) && (paddleLeft>1)) {
+    } else if ((key == 39 || key == 68) && (paddleLeft > 1)) {
         paddleLeft += pdx;
         if (paddleLeft > (pWidth - paddleWidth))
             paddleLeft = pWidth - paddleWidth;
@@ -75,7 +84,7 @@ function start() {
     render();
     detectCollision();
     diffuculty();
-    if (ballTop <= (pHeight - (25+20))) //playingArea height + score + paddle height
+    if (ballTop <= (pHeight - (25 + 20))) //playingArea height + score + paddle height
     {
         timer = requestAnimationFrame(start);
 
@@ -126,7 +135,7 @@ function collisionY() {
     //to check collision with paddle
     // check if ball on top of paddle and then ball between left and right of paddle
     //if (ballTop > pHeight - 33) {
-        if (ballTop > (pHeight - 70)) {
+    if (ballTop > (pHeight - 70)) {
         if ((ballLeft >= paddleLeft) && (ballLeft <= (paddleLeft + paddleWidth)))
             return true;
     }
@@ -148,4 +157,24 @@ function gameOver() {
     cancelAnimationFrame(timer);
     score.innerHTML += ".......GAME OVER.....";
     score.style.backgrounColor = "red";
+}
+
+function mouseDown(e) {
+    drag = true;
+}
+
+function mouseUp(e) {
+    drag = false;
+}
+
+function mouseMove(e) {
+    if (drag) {
+        e.preventDefault();
+        paddleLeft = e.clientX -32 ||e.TargetTouches[0] - 32;
+        if(paddleLeft < 0)
+        paddleLeft = 11;
+        if (paddleLeft > (pWidth - paddleWidth))
+            paddleLeft = pWidth - paddleWidth;
+            paddle.style.left =  paddleLeft+"px";
+    }
 }
