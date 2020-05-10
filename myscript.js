@@ -35,7 +35,7 @@ function init() {
     ball = document.getElementById('ball');
     paddle = document.getElementById('paddle');
     score = document.getElementById('score');
-    
+
     paddleWidth = 100;
 
     //store your dom object in local variable whenever possible, to reduce DOm interaction in gaming, its costly
@@ -44,13 +44,13 @@ function init() {
     layoutPage();
     document.addEventListener('keydown', keyListener, false);
 
-    document.addEventListener('mousedown', mouseDown, false);
-    document.addEventListener('mousemove', mouseMove, false);
-    document.addEventListener('mouseup', mouseUp, false);
+    playingArea.addEventListener('mousedown', mouseDown, false);
+    playingArea.addEventListener('mousemove', mouseMove, false);
+    playingArea.addEventListener('mouseup', mouseUp, false);
 
-    document.addEventListener('touchstart', mouseDown, false);
-    document.addEventListener('touchmove', mouseMove, false);
-    document.addEventListener('touchend', mouseUp, false);
+    playingArea.addEventListener('touchstart', mouseDown, false);
+    playingArea.addEventListener('touchmove', mouseMove, false);
+    playingArea.addEventListener('touchend', mouseUp, false);
 
 
     timer = requestAnimationFrame(start); //optimised than setInterval and setTimeout
@@ -66,19 +66,19 @@ function layoutPage() {
 
     playingArea.style.width = pWidth + "px";
     playingArea.style.height = pHeight + "px";
-    score.style.width = pWidth - 14+"px";
+    score.style.width = pWidth - 14 + "px";
 }
 
 //this event by default gets a key
 function keyListener(e) {
     var key = e.keyCode;
     // if key pressed => left key = 37, a = 65, and paddle is not on left
-    if ((key == 37 || key == 65) && paddleLeft >=1) {
+    if ((key == 37 || key == 65) && paddleLeft >= 1) {
         paddleLeft -= pdx;
         if (paddleLeft < 0)
             paddleLeft = 11;
 
-    } else if ((key == 39 || key == 68) && (paddleLeft >= 1) && paddleLeft <= (pWidth-paddleWidth)) {
+    } else if ((key == 39 || key == 68) && (paddleLeft >= 1) && paddleLeft <= (pWidth - paddleWidth)) {
         paddleLeft += pdx;
         if (paddleLeft >= (pWidth - paddleWidth))
             paddleLeft = pWidth - paddleWidth;
