@@ -1,0 +1,48 @@
+body{
+    background-color: yellow;
+}
+#playingArea {
+    position: absolute;
+    background-color: cornflowerblue;
+    border: darkblue;
+    border-width: 1px;
+    border-style: solid;
+    top: 10px;
+    left: 10px;
+    /* will set widht and height dynamically for various devices */
+}
+
+#ball {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 8px;
+    background-color: gold;
+    top: 30px;
+    left: 100px;
+}
+
+#paddle {
+    position: absolute;
+    bottom:20px;
+    width: 100px;
+    left: 220px;
+    height: 25px;
+    bottom:130px;
+    background-color: darkred;
+}
+
+#score {
+    position: absolute;
+    background-color: indigo;
+    font-size: 15px;
+    color: white;
+    width: calc(100% - 10px);
+    float: left;
+    height:42px;
+    padding:10px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    bottom:0px;
+    width: 390px;;
+
+}
