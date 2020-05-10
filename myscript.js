@@ -43,14 +43,18 @@ function init() {
 
     layoutPage();
     document.addEventListener('keydown', keyListener, false);
+
     document.addEventListener('mousedown', mouseDown, false);
     document.addEventListener('mousemove', mouseMove, false);
     document.addEventListener('mouseup', mouseUp, false);
 
-    document.addEventListener('touchstart', mouseDown, false);
+    document.addEventListener('touchstart', hello, false);
     document.addEventListener('touchmove', mouseMove, false);
     document.addEventListener('touchend', mouseUp, false);
-
+function hello()
+{
+    alert("Hello tocuh");
+}
 
     timer = requestAnimationFrame(start); //optimised than setInterval and setTimeout
 
