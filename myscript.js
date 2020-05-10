@@ -3,11 +3,16 @@ var paddle;
 var playingArea;
 var score;
 
-var aWidth = 400;; //width of screen
-var aHeight = 600; //height of screen
-var paddleWidth = 0;
-var pWidth = 390; //of playing area
-var pHeight = 595; //of playing area
+// var aWidth = 400;; //width of screen
+// var aHeight = 600; //height of screen
+// var paddleWidth = 0;
+// var pWidth = 390; //of playing area
+// var pHeight = 595; //of playing area
+var aWidth;
+var aHeight;
+var paddleWidth;
+var pWidth;
+var pHeight;
 
 var dx = 2; //speed of ball, x coordinates
 var dy = 2; //speed of ball, y coordinated
@@ -17,9 +22,9 @@ var currentScore = 0;
 var timer;
 
 //initial positions
-var paddleLeft = 180;
-var ballLeft = 30;
-var ballTop = 20;
+var paddleLeft = 200;
+var ballLeft = 100;
+var ballTop = 30;
 
 var drag = false;
 window.addEventListener('load', init);
@@ -30,6 +35,7 @@ function init() {
     ball = document.getElementById('ball');
     paddle = document.getElementById('paddle');
     score = document.getElementById('score');
+    
     paddleWidth = 100;
 
     //store your dom object in local variable whenever possible, to reduce DOm interaction in gaming, its costly
@@ -51,30 +57,30 @@ function init() {
 }
 
 function layoutPage() {
-    // aWidth = window.innerWidth;
-    //aHeight = window.innerHeight;
+    aWidth = window.innerWidth;
+    aHeight = window.innerHeight;
 
-    //pWidth = aWidth - 22;
-    pHeight = aHeight - 20; // height of device used - (height and bottom of score)
+    pWidth = aWidth - 22;
+    pHeight = aHeight - 50; // height of device used - (height and bottom of score)
 
     playingArea.style.width = pWidth + "px";
-    playingArea.style.height = pHeight + "px"
+    playingArea.style.height = pHeight + "px";
+    score.style.width = pWidth - 14+"px";
 }
 
 //this event by default gets a key
 function keyListener(e) {
     var key = e.keyCode;
     // if key pressed => left key = 37, a = 65, and paddle is not on left
-    if ((key == 37 || key == 65) && paddleLeft > 18) {
+    if ((key == 37 || key == 65) && paddleLeft >=1) {
         paddleLeft -= pdx;
         if (paddleLeft < 0)
-            paddleLeft = 18;
+            paddleLeft = 11;
 
-    } else if ((key == 39 || key == 68) && (paddleLeft > 1)) {
+    } else if ((key == 39 || key == 68) && (paddleLeft >= 1) && paddleLeft <= (pWidth-paddleWidth)) {
         paddleLeft += pdx;
-        if (paddleLeft > (pWidth - paddleWidth))
+        if (paddleLeft >= (pWidth - paddleWidth))
             paddleLeft = pWidth - paddleWidth;
-
     }
     paddle.style.left = paddleLeft + "px";
 }
@@ -135,7 +141,7 @@ function collisionY() {
     //to check collision with paddle
     // check if ball on top of paddle and then ball between left and right of paddle
     //if (ballTop > pHeight - 33) {
-    if (ballTop > (pHeight - 70)) {
+    if (ballTop > (pHeight - 50)) {
         if ((ballLeft >= paddleLeft) && (ballLeft <= (paddleLeft + paddleWidth)))
             return true;
     }
@@ -170,11 +176,11 @@ function mouseUp(e) {
 function mouseMove(e) {
     if (drag) {
         e.preventDefault();
-        paddleLeft = e.clientX -32 ||e.TargetTouches[0] - 32;
-        if(paddleLeft < 0)
-        paddleLeft = 11;
+        paddleLeft = e.clientX - 32 || e.TargetTouches[0] - 32;
+        if (paddleLeft < 0)
+            paddleLeft = 11;
         if (paddleLeft > (pWidth - paddleWidth))
             paddleLeft = pWidth - paddleWidth;
-            paddle.style.left =  paddleLeft+"px";
+        paddle.style.left = paddleLeft + "px";
     }
 }
