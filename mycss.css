@@ -30,6 +30,7 @@ body{
     height: 25px;
     bottom:40px;
     background-color: darkred;
+    cursor: pointer;
 }
 
 #score {

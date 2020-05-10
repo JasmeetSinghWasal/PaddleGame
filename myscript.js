@@ -48,13 +48,10 @@ function init() {
     document.addEventListener('mousemove', mouseMove, false);
     document.addEventListener('mouseup', mouseUp, false);
 
-    document.addEventListener('touchstart', hello, false);
+    document.addEventListener('touchstart', mouseDown, false);
     document.addEventListener('touchmove', mouseMove, false);
     document.addEventListener('touchend', mouseUp, false);
-function hello()
-{
-    alert("Hello tocuh");
-}
+
 
     timer = requestAnimationFrame(start); //optimised than setInterval and setTimeout
 
