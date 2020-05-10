@@ -44,9 +44,9 @@ function init() {
     layoutPage();
     document.addEventListener('keydown', keyListener, false);
 
-    playingArea.addEventListener('mousedown', mouseDown, false);
-    playingArea.addEventListener('mousemove', mouseMove, false);
-    playingArea.addEventListener('mouseup', mouseUp, false);
+    document.addEventListener('mousedown', mouseDown, false);
+    document.addEventListener('mousemove', mouseMove, false);
+    document.addEventListener('mouseup', mouseUp, false);
 
     playingArea.addEventListener('touchstart', mouseDown, false);
     playingArea.addEventListener('touchmove', mouseMove, false);
